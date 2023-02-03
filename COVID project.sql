@@ -131,3 +131,54 @@ WHERE dea.continent IS NOT NULL
 
 SELECT *
 FROM PercentPopulationVaccinated
+
+
+
+
+
+/*
+Queries used for Tableau Project
+*/
+
+
+
+-- 1. 
+
+SELECT SUM(new_cases) AS total_cases, SUM(CAST(new_deaths AS INT)) AS total_deaths, SUM(CAST(new_deaths AS INT))/SUM(new_cases)*100
+AS DeathPercentage
+FROM CoronaVirusProject..covidDeaths
+WHERE continent is not null 
+ORDER BY 1,2
+
+
+
+-- 2. 
+
+-- We take these out as they are not inluded in the above queries and want to stay consistent
+-- European Union is part of Europe
+
+SELECT location, SUM(CAST(new_deaths AS INT)) AS TotalDeathCount
+FROM CoronaVirusProject..covidDeaths
+WHERE continent IS NULL 
+AND location NOT IN ('World', 'European Union', 'International', 'High income', 'Upper middle income',
+'Lower middle income', 'Low income')
+GROUP BY location
+ORDER BY TotalDeathCount DESC
+
+
+-- 3.
+
+SELECT location, population, MAX(total_cases) AS HighestInfectionCount,  MAX((total_cases/population))*100 AS PercentPopulationInfected
+FROM CoronaVirusProject..covidDeaths
+GROUP BY location, population
+ORDER BY PercentPopulationInfected DESC
+
+
+-- 4.
+
+
+SELECT location, population, date, MAX(total_cases) AS HighestInfectionCount,  MAX((total_cases/population))*100 AS PercentPopulationInfected
+FROM CoronaVirusProject..covidDeaths
+GROUP BY location, population, date
+ORDER BY PercentPopulationInfected DESC
+
