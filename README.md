@@ -1,5 +1,5 @@
 # Covid_SQL_Project
-The purpose of this project was to practice manipulating data in referene to COVID-19 cases and deaths. After extracting various tables to reference, I created a visual dashboard in Tableau to showcase the data.
+The purpose of this project was to practice manipulating data in referene to COVID-19. After extracting various tables to reference, I created a visual dashboard in Tableau to showcase the amount of COVID cases and deaths various countries/continents have reported from 2020-2023.
 
 Link to Data:
 https://ourworldindata.org/covid-deaths
